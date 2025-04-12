@@ -199,13 +199,12 @@
         .modal {
             display: none; /* Скрыто по умолчанию */
             position: fixed; /* Фиксированное положение */
-            z-index: 1; /* Самый верхний слой */
+            z-index: 11; /* Самый верхний слой (больше, чем у overlay) */
             left: 0;
             top: 0;
             width: 100%; /* Полная ширина */
             height: 100%; /* Полная высота */
             overflow: auto; /* Включить прокрутку, если контент больше */
-            background-color: rgba(0,0,0,0.4); /* Черный с прозрачностью */
         }
 
         .modal-content {
@@ -216,6 +215,7 @@
             width: 80%; /* Можно изменить ширину */
             max-width: 600px; /* Максимальная ширина */
             border-radius: 10px;
+            position: relative; /* Для позиционирования относительно модального окна */
         }
 
         .modal-content h2 {
@@ -309,6 +309,10 @@
         <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
     </div>
 
+
+     <!-- Затемнение фона -->
+    <div id="overlay"></div>
+
         <!-- Модальное окно -->
     <div id="giveawayModal" class="modal">
         <div class="modal-content">
@@ -323,8 +327,6 @@
         </div>
     </div>
 
-    <!-- Затемнение фона -->
-    <div id="overlay"></div>
 
 
     <script>
@@ -393,8 +395,8 @@
 
         function toggleGiveawayMode() {
             // Открыть модальное окно
-            document.getElementById("giveawayModal").style.display = "block";
-            document.getElementById("overlay").style.display = "block";
+            document.getElementById("overlay").style.display = "block";  // Сначала показываем оверлей
+            document.getElementById("giveawayModal").style.display = "block"; // Затем показываем модальное окно
         }
 
         function confirmGiveawayMode() {
