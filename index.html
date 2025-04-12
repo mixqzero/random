@@ -194,6 +194,72 @@
             width: auto;
             text-align: left;
         }
+
+        /* --- Стили для модального окна --- */
+        .modal {
+            display: none; /* Скрыто по умолчанию */
+            position: fixed; /* Фиксированное положение */
+            z-index: 1; /* Самый верхний слой */
+            left: 0;
+            top: 0;
+            width: 100%; /* Полная ширина */
+            height: 100%; /* Полная высота */
+            overflow: auto; /* Включить прокрутку, если контент больше */
+            background-color: rgba(0,0,0,0.4); /* Черный с прозрачностью */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% сверху и по центру */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Можно изменить ширину */
+            max-width: 600px; /* Максимальная ширина */
+            border-radius: 10px;
+        }
+
+        .modal-content h2 {
+            color: #333;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .modal-content ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .modal-content ul li {
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .confirm-button {
+            background-color: #4CAF50; /* Зеленый */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        /* Стили для затемнения фона */
+        #overlay {
+            position: fixed; /* Фиксированное положение */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный */
+            z-index: 10; /* Над контентом, но под модальным окном */
+            display: none; /* Скрыт по умолчанию */
+        }
+
     </style>
 </head>
 <body>
@@ -206,6 +272,7 @@
     </div>
 
     <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
+    <button type="button" class="generate-button" onclick="toggleGiveawayMode()">Режим Розыгрыша</button>
 
     <form class="randomizer-form" id="randomizerForm">
         <div class="form-group">
@@ -242,14 +309,33 @@
         <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
     </div>
 
+        <!-- Модальное окно -->
+    <div id="giveawayModal" class="modal">
+        <div class="modal-content">
+            <h2><b>Вы точно хотите включить режим розыгрышей?</b></h2>
+            <ul>
+                <li>Включается функция "Исключить повторения"</li>
+                <li>Включается функция "По порядку (если много чисел)"</li>
+                <li>К номерам присваиваются тексты Участник №(номер)</li>
+                <li>Страница переименовывается на "Розыгрыш"</li>
+            </ul>
+            <button class="confirm-button" onclick="confirmGiveawayMode()">Подтвердить</button>
+        </div>
+    </div>
+
+    <!-- Затемнение фона -->
+    <div id="overlay"></div>
+
+
     <script>
+        let giveawayMode = false; // Глобальная переменная для отслеживания режима
+
         function generateRandomNumber() {
             let min = parseInt(document.getElementById("minNumber").value);
             let max = parseInt(document.getElementById("maxNumber").value);
             let count = parseInt(document.getElementById("countNumber").value);
             let excludeDuplicates = document.getElementById("excludeDuplicates").checked;
             let sortNumbers = document.getElementById("sortNumbers").checked;
-
 
             if (isNaN(min) || isNaN(max) || isNaN(count)) {
                 alert("Пожалуйста, введите корректные числа.");
@@ -274,7 +360,7 @@
 
             if (count === 1) {
                 let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
-                resultDiv.textContent = randomNumber;
+                resultDiv.textContent = giveawayMode ? `Участник №${randomNumber}` : randomNumber;
                 resultsDiv.textContent = "";
             } else {
                 let randomNumbers = [];
@@ -300,9 +386,39 @@
                 }
 
                 resultDiv.textContent = "";
-                resultsDiv.textContent = randomNumbers.join(', ');
+                resultsDiv.textContent = giveawayMode ? randomNumbers.map((num, index) => `Участник №${num}`).join(', ') : randomNumbers.join(', ');
             }
         }
+
+
+        function toggleGiveawayMode() {
+            // Открыть модальное окно
+            document.getElementById("giveawayModal").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function confirmGiveawayMode() {
+            giveawayMode = true;
+            document.getElementById("excludeDuplicates").checked = true;
+            document.getElementById("sortNumbers").checked = true;
+            document.title = "Розыгрыш от MixVine";
+            document.querySelector("h1").textContent = "Розыгрыш";
+             // Закрыть модальное окно и убрать затемнение
+            document.getElementById("giveawayModal").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        // Функция закрытия модального окна при клике вне его
+        window.onclick = function(event) {
+            let modal = document.getElementById("giveawayModal");
+            let overlay = document.getElementById("overlay");
+            if (event.target === modal || event.target === overlay) {
+                modal.style.display = "none";
+                overlay.style.display = "none";
+            }
+        }
+
+
     </script>
 
 </body>
