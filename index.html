@@ -224,6 +224,10 @@
             <input type="checkbox" id="excludeDuplicates">
             <label for="excludeDuplicates">Исключить повторения</label>
         </div>
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="sortNumbers">
+            <label for="sortNumbers">По порядку (если много чисел)</label>
+        </div>
     </form>
 
 
@@ -243,7 +247,9 @@
             let min = parseInt(document.getElementById("minNumber").value);
             let max = parseInt(document.getElementById("maxNumber").value);
             let count = parseInt(document.getElementById("countNumber").value);
-             let excludeDuplicates = document.getElementById("excludeDuplicates").checked;
+            let excludeDuplicates = document.getElementById("excludeDuplicates").checked;
+            let sortNumbers = document.getElementById("sortNumbers").checked;
+
 
             if (isNaN(min) || isNaN(max) || isNaN(count)) {
                 alert("Пожалуйста, введите корректные числа.");
@@ -266,7 +272,6 @@
             let resultDiv = document.getElementById("result");
             let resultsDiv = document.getElementById("results");
 
-
             if (count === 1) {
                 let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
                 resultDiv.textContent = randomNumber;
@@ -274,7 +279,7 @@
             } else {
                 let randomNumbers = [];
                 if (excludeDuplicates) {
-                     if (max - min + 1 < count) {
+                    if (max - min + 1 < count) {
                         alert("Невозможно исключить повторения, так как диапазон слишком мал для указанного количества чисел.");
                         return;
                     }
@@ -289,6 +294,11 @@
                         randomNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
                     }
                 }
+
+                if (sortNumbers) {
+                    randomNumbers.sort(function(a, b) { return a - b; });
+                }
+
                 resultDiv.textContent = "";
                 resultsDiv.textContent = randomNumbers.join(', ');
             }
