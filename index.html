@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Рандомайзер от MixVine</title>
+    <title>Розыгрыш от MixVine</title>
     <style>
         /* --- Анимации (только фон) --- */
         @keyframes purpleGoldGradientShift {
@@ -260,15 +260,21 @@
             display: none; /* Скрыт по умолчанию */
         }
 
+        /* Стили для многострочного вывода */
+        .multiline-results {
+            white-space: pre-line; /* Разрешить переносы строк */
+            text-align: center; /* Выравнивание текста */
+        }
+
     </style>
 </head>
 <body>
 
-    <h1>Рандомайзер</h1>
+    <h1>Розыгрыш</h1>
 
     <div class="result-container">
         <div id="result" class="result-number"></div>
-        <div id="results" class="result-numbers"></div>
+        <div id="results" class="result-numbers multiline-results"></div>
     </div>
 
     <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
@@ -321,7 +327,9 @@
                 <li>Включается функция "Исключить повторения"</li>
                 <li>Включается функция "По порядку (если много чисел)"</li>
                 <li>К номерам присваиваются тексты Участник №(номер)</li>
-                <li>Страница переименовывается на "Розыгрыш"</li>
+                <li>Выпавшие номера идут на разных строках</li>
+                <li>Текущее название страницы останется "Розыгрыш от MixVine"</li>
+                <li>Текущий заголовок страницы останется "Розыгрыш"</li>
             </ul>
             <button class="confirm-button" onclick="confirmGiveawayMode()">Подтвердить</button>
         </div>
@@ -388,7 +396,9 @@
                 }
 
                 resultDiv.textContent = "";
-                resultsDiv.textContent = giveawayMode ? randomNumbers.map((num, index) => `Участник №${num}`).join(', ') : randomNumbers.join(', ');
+                //resultsDiv.textContent = giveawayMode ? randomNumbers.map((num, index) => `Участник №${num}`).join(', ') : randomNumbers.join(', ');
+                resultsDiv.textContent = giveawayMode ? randomNumbers.map((num, index) => `Участник №${num}`).join('\n') : randomNumbers.join(', ');
+
             }
         }
 
@@ -403,8 +413,8 @@
             giveawayMode = true;
             document.getElementById("excludeDuplicates").checked = true;
             document.getElementById("sortNumbers").checked = true;
-            document.title = "Розыгрыш от MixVine";
-            document.querySelector("h1").textContent = "Розыгрыш";
+            //document.title = "Розыгрыш от MixVine";  //Удалено изменение Title
+            //document.querySelector("h1").textContent = "Розыгрыш"; //Удалено изменение заголовка страницы
              // Закрыть модальное окно и убрать затемнение
             document.getElementById("giveawayModal").style.display = "none";
             document.getElementById("overlay").style.display = "none";
