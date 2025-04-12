@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project MixVine - Рандомайзер</title>
+    <style>
+        /* --- Анимации (только фон) --- */
+        @keyframes purpleGoldGradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* --- Основные стили --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Выравнивание по верху */
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #8e44ad, #b48a00, #6a1b9a, #c89600);
+            background-size: 400% 400%;
+            animation: purpleGoldGradientShift 15s ease infinite;
+            overflow-x: hidden;
+            color: #f0f0f0;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative; /* Для футера */
+            padding-bottom: 75px; /* Оставляем место для контента и футера */
+        }
+
+        /* --- Заголовок --- */
+        h1 {
+            text-align: center;
+            color: #fff;
+            margin-top: 30px; /* Отступ сверху */
+            margin-bottom: 40px; /* Больше отступ снизу */
+            font-size: 3.5em; /* Большой шрифт */
+            font-family: 'Arial Black', sans-serif; /* Пример красивого шрифта */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
+        }
+
+        /* --- Форма рандомайзера --- */
+        .randomizer-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            font-size: 1.2em;
+            margin-right: 15px;
+            color: #eee;
+            width: 150px;
+            text-align: right;
+        }
+
+        .form-group input {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            color: #333;
+            width: 200px;
+            box-sizing: border-box;
+        }
+
+        /* --- Кнопка генерации --- */
+        .generate-button {
+            background-color: #c89600; /* Золотой */
+            color: #333; /* Темный текст */
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.3em; /* Большой шрифт */
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .generate-button:hover {
+            background-color: #b48a00; /* Затемнение при наведении */
+            transform: scale(1.05); /* Небольшое увеличение */
+        }
+
+        .generate-button:active {
+            transform: scale(0.98); /* Уменьшение при нажатии */
+        }
+
+        /* --- Результат --- */
+        .result-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .result-number {
+            font-size: 5em;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+        .result-numbers {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Ссылки на Политику и Соглашение --- */
+        .legal-links {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .legal-links a {
+            color: #f1c40f;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+        }
+        .legal-links a:hover {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* --- Футер --- */
+        footer {
+            position: absolute; bottom: 0; left: 0; width: 100%;
+            text-align: center; padding: 10px 0;
+            color: rgba(255, 255, 255, 0.6); font-size: 13px;
+        }
+        .footer-version {
+            display: block;
+            margin-top: 3px;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+
+        /* --- АДАПТИВНОСТЬ --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 3em; margin-bottom: 30px; }
+            .form-group label { font-size: 1.1em; width: 120px; }
+            .form-group input { font-size: 1em; width: 150px; }
+            .generate-button { font-size: 1.2em; padding: 12px 25px; }
+            .result-number { font-size: 4em; }
+        }
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5em; margin-bottom: 20px; }
+            .form-group { flex-direction: column; align-items: stretch; }
+            .form-group label {
+                font-size: 1em;
+                width: auto;
+                text-align: left;
+                margin-bottom: 5px;
+            }
+            .form-group input { font-size: 0.9em; width: 100%; }
+            .generate-button { font-size: 1em; padding: 10px 20px; }
+            .result-number { font-size: 3em; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Project MixVine - Рандомайзер</h1>
+
+    <form class="randomizer-form" id="randomizerForm">
+        <div class="form-group">
+            <label for="minNumber">Минимальное число:</label>
+            <input type="number" id="minNumber" value="1">
+        </div>
+        <div class="form-group">
+            <label for="maxNumber">Максимальное число:</label>
+            <input type="number" id="maxNumber" value="100">
+        </div>
+         <div class="form-group">
+            <label for="countNumber">Количество чисел:</label>
+            <input type="number" id="countNumber" value="1">
+        </div>
+        <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
+    </form>
+
+    <div class="result-container">
+        <div id="result" class="result-number"></div>
+        <div id="results" class="result-numbers"></div>
+    </div>
+
+    <div class="legal-links">
+        <a href="https://mixvineproject.github.io/politika" target="_blank">Политика конфиденциальности</a> и
+        <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
+    </div>
+
+    <footer>
+        <span>© 2024-2025 Project MixVine. Все права защищены.</span>
+        <br>
+        <span class="footer-version">ver. web3.1Global</span>
+    </footer>
+
+    <script>
+        function generateRandomNumber() {
+            let min = parseInt(document.getElementById("minNumber").value);
+            let max = parseInt(document.getElementById("maxNumber").value);
+            let count = parseInt(document.getElementById("countNumber").value);
+
+            if (isNaN(min) || isNaN(max) || isNaN(count)) {
+                alert("Пожалуйста, введите корректные числа.");
+                return;
+            }
+
+            if (min >= max) {
+                alert("Минимальное число должно быть меньше максимального.");
+                return;
+            }
+            if (count<=0){
+                 alert("Количество чисел должно быть больше 0.");
+                 return;
+            }
+             if (count>15){
+                 alert("слишком много чисел");
+                 return;
+            }
+
+            let resultDiv = document.getElementById("result");
+            let resultsDiv = document.getElementById("results");
+            if (count === 1) {
+                let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+                resultDiv.textContent = randomNumber;
+                 resultsDiv.textContent = "";
+            } else {
+                let randomNumbers = [];
+                for (let i = 0; i < count; i++) {
+                    randomNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                }
+               resultDiv.textContent = "";
+               resultsDiv.textContent = randomNumbers.join(', ');
+            }
+        }
+    </script>
+
+</body>
+</html>
