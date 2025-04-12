@@ -180,7 +180,20 @@
             .result-number { font-size: 3em; }
             .result-numbers { font-size: 2em; }
         }
+        /* --- Чекбокс (кастомный стиль) --- */
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+        }
 
+        .checkbox-wrapper label {
+            font-size: 0.9em;
+            color: #eee;
+            margin-left: 5px;
+            width: auto;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +220,10 @@
             <label for="countNumber">Кол-во чисел:</label>
             <input type="number" id="countNumber" value="1">
         </div>
+         <div class="checkbox-wrapper">
+            <input type="checkbox" id="excludeDuplicates">
+            <label for="excludeDuplicates">Исключить повторения</label>
+        </div>
     </form>
 
 
@@ -226,6 +243,7 @@
             let min = parseInt(document.getElementById("minNumber").value);
             let max = parseInt(document.getElementById("maxNumber").value);
             let count = parseInt(document.getElementById("countNumber").value);
+             let excludeDuplicates = document.getElementById("excludeDuplicates").checked;
 
             if (isNaN(min) || isNaN(max) || isNaN(count)) {
                 alert("Пожалуйста, введите корректные числа.");
@@ -236,28 +254,43 @@
                 alert("Минимальное число должно быть меньше максимального.");
                 return;
             }
-            if (count<=0){
-                 alert("Количество чисел должно быть больше 0.");
-                 return;
+            if (count <= 0) {
+                alert("Количество чисел должно быть больше 0.");
+                return;
             }
-             if (count>15){
-                 alert("Слишком много чисел.");
-                 return;
+            if (count > 15) {
+                alert("Слишком много чисел.");
+                return;
             }
 
             let resultDiv = document.getElementById("result");
             let resultsDiv = document.getElementById("results");
+
+
             if (count === 1) {
                 let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
                 resultDiv.textContent = randomNumber;
-                 resultsDiv.textContent = "";
+                resultsDiv.textContent = "";
             } else {
                 let randomNumbers = [];
-                for (let i = 0; i < count; i++) {
-                    randomNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                if (excludeDuplicates) {
+                     if (max - min + 1 < count) {
+                        alert("Невозможно исключить повторения, так как диапазон слишком мал для указанного количества чисел.");
+                        return;
+                    }
+                    while (randomNumbers.length < count) {
+                        let randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
+                        if (!randomNumbers.includes(randomNumber)) {
+                            randomNumbers.push(randomNumber);
+                        }
+                    }
+                } else {
+                    for (let i = 0; i < count; i++) {
+                        randomNumbers.push(Math.floor(Math.random() * (max - min + 1)) + min);
+                    }
                 }
-               resultDiv.textContent = "";
-               resultsDiv.textContent = randomNumbers.join(', ');
+                resultDiv.textContent = "";
+                resultsDiv.textContent = randomNumbers.join(', ');
             }
         }
     </script>
