@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Розыгрыш от MixVine</title>
+    <title>Рандомайзер от MixVine</title>
     <style>
         /* --- Анимации (только фон) --- */
         @keyframes purpleGoldGradientShift {
@@ -270,7 +270,7 @@
 </head>
 <body>
 
-    <h1>Розыгрыш</h1>
+    <h1>Рандомайзер</h1>
 
     <div class="result-container">
         <div id="result" class="result-number"></div>
@@ -328,8 +328,8 @@
                 <li>Включается функция "По порядку (если много чисел)"</li>
                 <li>К номерам присваиваются тексты Участник №(номер)</li>
                 <li>Выпавшие номера идут на разных строках</li>
-                <li>Текущее название страницы останется "Розыгрыш от MixVine"</li>
-                <li>Текущий заголовок страницы останется "Розыгрыш"</li>
+                <!-- <li>Текущее название страницы останется "Рандомайзер от MixVine"</li>
+                <li>Текущий заголовок страницы останется "Рандомайзер"</li> -->
             </ul>
             <button class="confirm-button" onclick="confirmGiveawayMode()">Подтвердить</button>
         </div>
@@ -413,8 +413,8 @@
             giveawayMode = true;
             document.getElementById("excludeDuplicates").checked = true;
             document.getElementById("sortNumbers").checked = true;
-            //document.title = "Розыгрыш от MixVine";  //Удалено изменение Title
-            //document.querySelector("h1").textContent = "Розыгрыш"; //Удалено изменение заголовка страницы
+            document.title = "Розыгрыш от MixVine";  //Теперь меняем Title только при включении
+            document.querySelector("h1").textContent = "Розыгрыш"; //Теперь меняем заголовок только при включении
              // Закрыть модальное окно и убрать затемнение
             document.getElementById("giveawayModal").style.display = "none";
             document.getElementById("overlay").style.display = "none";
