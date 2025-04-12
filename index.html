@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project MixVine - Рандомайзер</title>
+    <title>Рандомайзер от MixVine</title>
     <style>
         /* --- Анимации (только фон) --- */
         @keyframes purpleGoldGradientShift {
@@ -28,7 +28,7 @@
             padding: 20px;
             box-sizing: border-box;
             position: relative; /* Для футера */
-            padding-bottom: 75px; /* Оставляем место для контента и футера */
+            padding-bottom: 115px; /* Оставляем место для контента, политики и футера */
         }
 
         /* --- Заголовок --- */
@@ -45,7 +45,7 @@
         /* --- Результат --- */
         .result-container {
             text-align: center;
-            margin-bottom: 30px; /* Отступ перед формой */
+            margin-bottom: 15px; /* Отступ перед формой */
         }
 
         .result-number {
@@ -66,7 +66,6 @@
             align-items: center;
             width: 100%;
             max-width: 500px;
-            /* margin-bottom: 30px;  Убрали отступ снизу (перенесли выше) */
         }
 
         .form-group {
@@ -74,58 +73,64 @@
             justify-content: space-between;
             align-items: center;
             width: 100%;
-            margin-bottom: 7px; /* Уменьшили отступ еще больше */
+            margin-bottom: 2px; /* Убрали почти все отступы */
         }
 
         .form-group label {
-            font-size: 1em; /* Уменьшили шрифт */
-            margin-right: 8px; /* Уменьшили отступ */
+            font-size: 1em;
+            margin-right: 0; /* Убрали отступ справа */
             color: #eee;
-            width: 120px; /* Уменьшили ширину */
+            width: 120px;
             text-align: right;
+            padding-right: 3px; /*небольшой отступ для визуала*/
         }
 
         .form-group input {
-            padding: 8px; /* Уменьшили отступы */
+            padding: 6px; /* Уменьшили отступы */
             border: none;
             border-radius: 5px;
-            font-size: 0.9em; /* Уменьшили шрифт */
+            font-size: 0.9em;
             color: #333;
-            width: 150px; /* Уменьшили ширину */
+            width: 150px;
             box-sizing: border-box;
         }
 
         /* --- Кнопка генерации --- */
         .generate-button {
-            background-color: #c89600; /* Золотой */
-            color: #333; /* Темный текст */
-            padding: 12px 25px; /* Уменьшили отступы */
+            background-color: #c89600;
+            color: #333;
+            padding: 12px 25px;
             border: none;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 1.1em; /* Уменьшили шрифт */
+            font-size: 1.1em;
             font-weight: bold;
             text-align: center;
             transition: background-color 0.3s ease, transform 0.1s ease;
             box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
             cursor: pointer;
-            margin-top: 12px; /* Уменьшили отступ */
+            margin-top: 15px;
+            margin-bottom: 20px; /* Добавили отступ снизу */
+            align-self: center; /* Центрируем кнопку */
         }
 
         .generate-button:hover {
-            background-color: #b48a00; /* Затемнение при наведении */
-            transform: scale(1.05); /* Небольшое увеличение */
+            background-color: #b48a00;
+            transform: scale(1.05);
         }
 
         .generate-button:active {
-            transform: scale(0.98); /* Уменьшение при нажатии */
+            transform: scale(0.98);
         }
 
         /* --- Ссылки на Политику и Соглашение --- */
         .legal-links {
             text-align: center;
-            margin-bottom: 10px;
-            font-size: 14px;
+            font-size: 13px;
+            position: absolute; /* Фиксированное положение */
+            bottom: 35px;          /* Располагаем выше версии */
+            left: 0;
+            width: 100%;
         }
         .legal-links a {
             color: #f1c40f;
@@ -140,8 +145,8 @@
         /* --- Футер --- */
         footer {
             position: absolute; bottom: 0; left: 0; width: 100%;
-            text-align: center; padding: 10px 0;
-            color: rgba(255, 255, 255, 0.6); font-size: 13px;
+            text-align: center; padding: 5px 0; /* Уменьшил отступы */
+            color: rgba(255, 255, 255, 0.6); font-size: 12px; /*Уменьшил размер шрифта*/
         }
         .footer-version {
             display: block;
@@ -153,7 +158,7 @@
 
         /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3em; margin-bottom: 20px; }
+            h1 { font-size: 3em; margin-bottom: 15px; }
             .form-group label { font-size: 0.9em; width: 100px; }
             .form-group input { font-size: 0.8em; width: 120px; }
             .generate-button { font-size: 1em; padding: 10px 20px; }
@@ -161,13 +166,14 @@
             .result-numbers { font-size: 2.5em; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 2.5em; margin-bottom: 15px; }
+            h1 { font-size: 2.5em; margin-bottom: 10px; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label {
                 font-size: 0.8em;
                 width: auto;
                 text-align: left;
-                margin-bottom: 3px;
+                margin-bottom: 2px;
+                padding-right: 0px;
             }
             .form-group input { font-size: 0.7em; width: 100%; }
             .generate-button { font-size: 0.9em; padding: 8px 16px; }
@@ -179,12 +185,14 @@
 </head>
 <body>
 
-    <h1>Project MixVine - Рандомайзер</h1>
+    <h1>Рандомайзер</h1>
 
     <div class="result-container">
         <div id="result" class="result-number"></div>
         <div id="results" class="result-numbers"></div>
     </div>
+
+    <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
 
     <form class="randomizer-form" id="randomizerForm">
         <div class="form-group">
@@ -199,20 +207,19 @@
             <label for="countNumber">Кол-во чисел:</label>
             <input type="number" id="countNumber" value="1">
         </div>
-        <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
     </form>
 
 
-    <div class="legal-links">
+    <footer >
+        <span>© 2024-2025 Project MixVine. Все права защищены.</span>
+        <br>
+       <span class="footer-version">ver. web3.1Global</span>
+    </footer>
+
+        <div class="legal-links">
         <a href="https://mixvineproject.github.io/politika" target="_blank">Политика конфиденциальности</a> и
         <a href="https://mixvineproject.github.io/soglasie" target="_blank">Пользовательское соглашение</a>
     </div>
-
-    <footer>
-        <span>© 2024-2025 Project MixVine. Все права защищены.</span>
-        <br>
-        <span class="footer-version">ver. web3.1Global</span>
-    </footer>
 
     <script>
         function generateRandomNumber() {
