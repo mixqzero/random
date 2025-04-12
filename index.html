@@ -36,78 +36,16 @@
             text-align: center;
             color: #fff;
             margin-top: 30px; /* Отступ сверху */
-            margin-bottom: 40px; /* Больше отступ снизу */
+            margin-bottom: 20px; /* Больше отступ снизу */
             font-size: 3.5em; /* Большой шрифт */
             font-family: 'Arial Black', sans-serif; /* Пример красивого шрифта */
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Тень */
         }
 
-        /* --- Форма рандомайзера --- */
-        .randomizer-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 500px;
-            margin-bottom: 30px;
-        }
-
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            font-size: 1.2em;
-            margin-right: 15px;
-            color: #eee;
-            width: 150px;
-            text-align: right;
-        }
-
-        .form-group input {
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            color: #333;
-            width: 200px;
-            box-sizing: border-box;
-        }
-
-        /* --- Кнопка генерации --- */
-        .generate-button {
-            background-color: #c89600; /* Золотой */
-            color: #333; /* Темный текст */
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.3em; /* Большой шрифт */
-            font-weight: bold;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.1s ease;
-            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        .generate-button:hover {
-            background-color: #b48a00; /* Затемнение при наведении */
-            transform: scale(1.05); /* Небольшое увеличение */
-        }
-
-        .generate-button:active {
-            transform: scale(0.98); /* Уменьшение при нажатии */
-        }
-
         /* --- Результат --- */
         .result-container {
             text-align: center;
-            margin-top: 30px;
+            margin-bottom: 30px; /* Отступ перед формой */
         }
 
         .result-number {
@@ -119,6 +57,68 @@
             font-size: 3em;
             color: #fff;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- Форма рандомайзера --- */
+        .randomizer-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 500px;
+            /* margin-bottom: 30px;  Убрали отступ снизу (перенесли выше) */
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px; /* Уменьшили отступ */
+        }
+
+        .form-group label {
+            font-size: 1em; /* Уменьшили шрифт */
+            margin-right: 10px; /* Уменьшили отступ */
+            color: #eee;
+            width: 120px; /* Уменьшили ширину */
+            text-align: right;
+        }
+
+        .form-group input {
+            padding: 8px; /* Уменьшили отступы */
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9em; /* Уменьшили шрифт */
+            color: #333;
+            width: 150px; /* Уменьшили ширину */
+            box-sizing: border-box;
+        }
+
+        /* --- Кнопка генерации --- */
+        .generate-button {
+            background-color: #c89600; /* Золотой */
+            color: #333; /* Темный текст */
+            padding: 12px 25px; /* Уменьшили отступы */
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.1em; /* Уменьшили шрифт */
+            font-weight: bold;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.1s ease;
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+            margin-top: 15px; /* Уменьшили отступ */
+        }
+
+        .generate-button:hover {
+            background-color: #b48a00; /* Затемнение при наведении */
+            transform: scale(1.05); /* Небольшое увеличение */
+        }
+
+        .generate-button:active {
+            transform: scale(0.98); /* Уменьшение при нажатии */
         }
 
         /* --- Ссылки на Политику и Соглашение --- */
@@ -153,24 +153,26 @@
 
         /* --- АДАПТИВНОСТЬ --- */
         @media (max-width: 768px) {
-            h1 { font-size: 3em; margin-bottom: 30px; }
-            .form-group label { font-size: 1.1em; width: 120px; }
-            .form-group input { font-size: 1em; width: 150px; }
-            .generate-button { font-size: 1.2em; padding: 12px 25px; }
+            h1 { font-size: 3em; margin-bottom: 20px; }
+            .form-group label { font-size: 0.9em; width: 100px; }
+            .form-group input { font-size: 0.8em; width: 120px; }
+            .generate-button { font-size: 1em; padding: 10px 20px; }
             .result-number { font-size: 4em; }
+            .result-numbers { font-size: 2.5em; }
         }
         @media (max-width: 480px) {
-            h1 { font-size: 2.5em; margin-bottom: 20px; }
+            h1 { font-size: 2.5em; margin-bottom: 15px; }
             .form-group { flex-direction: column; align-items: stretch; }
             .form-group label {
-                font-size: 1em;
+                font-size: 0.8em;
                 width: auto;
                 text-align: left;
-                margin-bottom: 5px;
+                margin-bottom: 3px;
             }
-            .form-group input { font-size: 0.9em; width: 100%; }
-            .generate-button { font-size: 1em; padding: 10px 20px; }
+            .form-group input { font-size: 0.7em; width: 100%; }
+            .generate-button { font-size: 0.9em; padding: 8px 16px; }
             .result-number { font-size: 3em; }
+            .result-numbers { font-size: 2em; }
         }
 
     </style>
@@ -179,26 +181,27 @@
 
     <h1>Project MixVine - Рандомайзер</h1>
 
-    <form class="randomizer-form" id="randomizerForm">
-        <div class="form-group">
-            <label for="minNumber">Минимальное число:</label>
-            <input type="number" id="minNumber" value="1">
-        </div>
-        <div class="form-group">
-            <label for="maxNumber">Максимальное число:</label>
-            <input type="number" id="maxNumber" value="100">
-        </div>
-         <div class="form-group">
-            <label for="countNumber">Количество чисел:</label>
-            <input type="number" id="countNumber" value="1">
-        </div>
-        <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
-    </form>
-
     <div class="result-container">
         <div id="result" class="result-number"></div>
         <div id="results" class="result-numbers"></div>
     </div>
+
+    <form class="randomizer-form" id="randomizerForm">
+        <div class="form-group">
+            <label for="minNumber">Мин. число:</label>
+            <input type="number" id="minNumber" value="1">
+        </div>
+        <div class="form-group">
+            <label for="maxNumber">Макс. число:</label>
+            <input type="number" id="maxNumber" value="100">
+        </div>
+        <div class="form-group">
+            <label for="countNumber">Кол-во чисел:</label>
+            <input type="number" id="countNumber" value="1">
+        </div>
+         <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
+    </form>
+
 
     <div class="legal-links">
         <a href="https://mixvineproject.github.io/politika" target="_blank">Политика конфиденциальности</a> и
@@ -231,7 +234,7 @@
                  return;
             }
              if (count>15){
-                 alert("слишком много чисел");
+                 alert("Слишком много чисел.");
                  return;
             }
 
