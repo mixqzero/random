@@ -145,6 +145,12 @@
             transform: scale(0.98);
         }
 
+        /* --- Кнопка "Режим Розыгрыша" --- */
+        .generate-button.giveaway-button {
+            padding: 10px 20px;  /* Уменьшаем отступы */
+            font-size: 1em;       /* Уменьшаем размер шрифта */
+        }
+
         /* --- Ссылки на Политику и Соглашение --- */
         .legal-links {
             text-align: center;
@@ -288,6 +294,21 @@
             text-align: center; /* Выравнивание текста */
         }
 
+        /* Стили для крестика закрытия модального окна */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .close-button:hover {
+            color: #333;
+        }
+
     </style>
 </head>
 <body>
@@ -305,7 +326,7 @@
     </div>
 
     <button type="button" class="generate-button" onclick="generateRandomNumber()">Сгенерировать</button>
-    <button type="button" class="generate-button" onclick="toggleGiveawayMode()">Режим Розыгрыша</button>
+    <button type="button" class="generate-button giveaway-button" onclick="toggleGiveawayMode()">Режим Розыгрыша</button>
 
     <form class="randomizer-form" id="randomizerForm">
         <div class="form-group">
@@ -344,6 +365,7 @@
         <!-- Модальное окно -->
     <div id="giveawayModal" class="modal">
         <div class="modal-content">
+            <span class="close-button" onclick="closeGiveawayModal()">&times;</span>
             <h2><b>Вы точно хотите включить режим розыгрышей?</b></h2>
             <ul>
                 <li>Включается функция "Исключить повторения"</li>
@@ -442,13 +464,17 @@
             document.getElementById("overlay").style.display = "none";
         }
 
+        function closeGiveawayModal() {
+            document.getElementById("giveawayModal").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+
         // Функция закрытия модального окна при клике вне его
         window.onclick = function(event) {
             let modal = document.getElementById("giveawayModal");
             let overlay = document.getElementById("overlay");
             if (event.target === modal || event.target === overlay) {
-                modal.style.display = "none";
-                overlay.style.display = "none";
+                closeGiveawayModal();
             }
         }
 
